@@ -9,9 +9,6 @@
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="./style.css">
     <title>Les BD</title>
-    <script src="./data/auteurs.js"></script>
-    <script src="./data/albums.js"></script>
-    <script src="./data/series.js"></script>
 </head>
 
 <header>
@@ -27,13 +24,33 @@
 <body>
     <div class="container">
         <h1>Liste des BD</h1>
-        <aside id="panier">
-            <h2>Panier</h2>
-            <ul id="panier-liste">
-                <!-- Ici vous affichez les éléments du panier -->
-            </ul>
-            <p>Total du panier: <span id="total-panier">0</span> €</p>
-        </aside>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#panierModal">
+            Voir le panier
+        </button>
+        
+        <!-- La modal -->
+        <div class="modal fade" id="panierModal" tabindex="-1" role="dialog" aria-labelledby="panierModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="panierModalLabel">Panier</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Ici seront affichés les éléments du panier -->
+                        <ul id="panier-liste-modal"></ul>
+                        <p>Total du panier: <span id="total-panier-modal">0</span> €</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        <button type="button" class="btn btn-danger" onclick="viderPanier()">Vider le panier</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="row">
             <div class="col-sm-4 col-lg-6">
@@ -70,6 +87,10 @@
     <div id="authorWorks" class="row mt-4">
         <!-- Ici seront affichées les œuvres de l'auteur -->
     </div>
+    <div>
+        <a href="./inscription.html" class="btn"  role="button">S'inscrire</a>
+        <a href="#" class="btn"  role="button">Se Connecter</a>
+    </div>
 
     <div id="tableContainer" class="table-responsive">
         <button id="showAllButton">Show All</button>
@@ -84,6 +105,9 @@
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="./data/auteurs.js"></script>
+    <script src="./data/albums.js"></script>
+    <script src="./data/series.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"

@@ -1,3 +1,5 @@
+
+
 document.addEventListener('DOMContentLoaded', function () {
     const srcImg = "images/";
     const albumDefaultMini = srcImg + "noComicsMini.jpeg";
@@ -20,18 +22,23 @@ document.addEventListener('DOMContentLoaded', function () {
     var searchAuthorInput = document.getElementById('searchAuthor');
     var searchButton = document.getElementById('searchButton');
     var authorWorksContainer = document.getElementById('authorWorks');
+    var panierListeModal = document.getElementById('panier-liste-modal');
+    var totalPanierModal = document.getElementById('total-panier-modal');
 
     searchButton.addEventListener('click', function () {
-        var authorName = searchAuthorInput.value.trim().toLowerCase();
+        var searchValue = searchAuthorInput.value.trim().toLowerCase();
 
-        // Filtrer les œuvres de l'auteur
-        var authorWorks = Array.from(albums.values()).filter(function (album) {
-            var author = auteurs.get(album.idAuteur);
-            return author && author.nom.toLowerCase() === authorName;
+        // Filtrer les œuvres par nom d'œuvre ou nom d'auteur
+        var filteredWorks = Array.from(albums.values()).filter(function (work) {
+            var author = auteurs.get(work.idAuteur);
+            return (
+                (work.titre.toLowerCase().includes(searchValue)) ||
+                (author && author.nom.toLowerCase().includes(searchValue))
+            );
         });
 
-        // Afficher les œuvres de l'auteur dans des cards
-        displayAuthorWorks(authorWorks);
+        // Afficher les œuvres dans des cards
+        displayAuthorWorks(filteredWorks);
     });
 
     function displayAuthorWorks(works) {
@@ -60,10 +67,9 @@ document.addEventListener('DOMContentLoaded', function () {
         seriesElement.className = 'card-text';
 
         // Recherche de la série correspondante dans la Map des séries
-        var serie = series.get(work.idSerie);
-
-        // Vérifie si la série existe avant d'accéder à ses propriétés
-        seriesElement.textContent = serie ? "Série : " + serie.nom : "Série : Inconnue";
+        var serie = series.get(work.idSerie); // Utiliser la variable globale series
+        console.log(series.get(work.idSerie));
+        seriesElement.textContent = serie ? "Série : " + serie.nom : "";
 
         var number = document.createElement('p');
         number.className = 'card-text';
@@ -72,6 +78,14 @@ document.addEventListener('DOMContentLoaded', function () {
         var price = document.createElement('p');
         price.className = 'card-text';
         price.textContent = "Prix : " + work.prix + " €";
+        var addToCartButton = document.createElement('button');
+        addToCartButton.textContent = 'Ajouter au panier';
+        addToCartButton.addEventListener('click', function () {
+            addToCart(work);
+            console.log(work);
+        });
+
+        cardBody.appendChild(addToCartButton);
 
         cardBody.appendChild(title);
         cardBody.appendChild(seriesElement);
@@ -81,6 +95,46 @@ document.addEventListener('DOMContentLoaded', function () {
         card.appendChild(cardBody);
 
         return card;
+    }
+
+    var panier = [];
+
+    var panierListe = document.getElementById('panier-liste');
+    var totalPanier = document.getElementById('total-panier');
+    var panier = []; // Array pour stocker les éléments du panier
+
+    function addToCart(work) {
+        // Vérifiez si l'article est déjà dans le panier
+        var existingItem = panier.findIndex(item => item.work.numero === work.numero);
+
+        console.log(existingItem);
+        if (existingItem !== -1) {
+            // Si l'article est déjà dans le panier, mettez à jour la quantité
+            panier[existingItem].quantity++;
+        } else {
+            // Sinon, ajoutez un nouvel élément au panier
+            panier.push({ work, quantity: 1 });
+        }
+
+        // Mettez à jour l'affichage du panier
+        displayCart();
+    }
+
+    function displayCart() {
+        // Effacez le contenu actuel du panier
+        panierListeModal.innerHTML = '';
+
+        console.log(panier)
+        // Affichez chaque élément du panier
+        panier.forEach(item => {
+            var listItem = document.createElement('li');
+            listItem.textContent = `${item.work.titre} - Quantité : ${item.quantity}`;
+            panierListeModal.appendChild(listItem);
+        });
+
+        // Calculez et affichez le total du panier
+        var total = panier.reduce((acc, item) => acc + item.work.prix * item.quantity, 0);
+        totalPanierModal.textContent = total;
     }
 
     imgAlbum.addEventListener("error", function () {
@@ -199,4 +253,30 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
+
+    function removeFromCart(work) {
+        // Retirez un article du panier
+        var existingItem = panier.find(item => item.work.id === work.id);
+    
+        if (existingItem) {
+            existingItem.quantity--;
+    
+            if (existingItem.quantity === 0) {
+                // Si la quantité atteint 0, retirez complètement l'article du panier
+                panier = panier.filter(item => item.work.id !== work.id);
+            }
+        }
+    
+        // Mettez à jour l'affichage du panier
+        displayCart();
+    }
+    
+    function viderPanier() {
+        // Vide complètement le panier
+        panier = [];
+    
+        // Mettez à jour l'affichage du panier
+        displayCart();
+    }
+    
 });

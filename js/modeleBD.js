@@ -48,41 +48,40 @@ document.addEventListener('DOMContentLoaded', function () {
     function createWorkCard(work) {
         var card = document.createElement('div');
         card.className = 'card';
-    
+
         var cardBody = document.createElement('div');
         cardBody.className = 'card-body';
-    
+
         var title = document.createElement('h5');
         title.className = 'card-title';
         title.textContent = work.titre;
-    
+
         var seriesElement = document.createElement('p');
         seriesElement.className = 'card-text';
-    
+
         // Recherche de la série correspondante dans la Map des séries
-        var serie = albums.get(work.idSerie);
-    
+        var serie = series.get(work.idSerie);
+
         // Vérifie si la série existe avant d'accéder à ses propriétés
         seriesElement.textContent = serie ? "Série : " + serie.nom : "Série : Inconnue";
-    
+
         var number = document.createElement('p');
         number.className = 'card-text';
         number.textContent = "Numéro : " + work.numero;
-    
+
         var price = document.createElement('p');
         price.className = 'card-text';
         price.textContent = "Prix : " + work.prix + " €";
-    
+
         cardBody.appendChild(title);
         cardBody.appendChild(seriesElement);
         cardBody.appendChild(number);
         cardBody.appendChild(price);
-    
+
         card.appendChild(cardBody);
-    
+
         return card;
     }
-    
 
     imgAlbum.addEventListener("error", function () {
         prbImg(this);

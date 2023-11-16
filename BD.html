@@ -7,24 +7,33 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="./style.css">
     <title>Les BD</title>
     <script src="./data/auteurs.js"></script>
     <script src="./data/albums.js"></script>
     <script src="./data/series.js"></script>
 </head>
 
+<header>
+    <div class="row">
+        <div class="col-sm-12">
+            <label for="searchAuthor">Rechercher par auteur :</label>
+            <input type="text" id="searchAuthor" placeholder="Nom de l'auteur">
+            <button id="searchButton">Rechercher</button>
+        </div>
+    </div>
+</header>
+
 <body>
-    <header>
-        <button id="showAllButton">Show All</button>
-
-        <div class="spacer"></div>
-
-        <div id="parent"></div>
-    </header>
-
     <div class="container">
         <h1>Liste des BD</h1>
+        <aside id="panier">
+            <h2>Panier</h2>
+            <ul id="panier-liste">
+                <!-- Ici vous affichez les éléments du panier -->
+            </ul>
+            <p>Total du panier: <span id="total-panier">0</span> €</p>
+        </aside>
 
         <div class="row">
             <div class="col-sm-4 col-lg-6">
@@ -34,20 +43,20 @@
                 </p>
                 <p>
                     <label for="serie">Série :</label>
-                    <input type="text" id="serie" readonly>
+                    <input type="text" id="serie">
 
                     <label for="numero">Album N° :</label>
-                    <input type="text" id="numero" readonly>
+                    <input type="text" id="numero">
 
                     <label for="titre">Titre :</label>
-                    <input type="text" id="titre" readonly>
+                    <input type="text" id="titre">
 
                     <label for="auteur">Auteur :</label>
-                    <input type="text" id="auteur" readonly>
+                    <input type="text" id="auteur">
                 </p>
                 <p>
                     <label for="prix">Prix :</label>
-                    <input type="number" id="prix" readonly>
+                    <input type="number" id="prix">
                 </p>
                 <div is="toto">
                     <img src="images/noComicsMini.jpeg" id="albumMini">
@@ -58,8 +67,12 @@
             </div>
         </div>
     </div>
+    <div id="authorWorks" class="row mt-4">
+        <!-- Ici seront affichées les œuvres de l'auteur -->
+    </div>
 
     <div id="tableContainer" class="table-responsive">
+        <button id="showAllButton">Show All</button>
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -69,7 +82,8 @@
             <tbody id="tableBody"></tbody>
         </table>
     </div>
-
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"

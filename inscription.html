@@ -4,65 +4,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-   <link rel="stylesheet" href="form.css">
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var form = document.querySelector('form');
-            form.addEventListener('submit', function (event) {
-                var password1 = document.querySelector('input[name="mdp"]');
-                var password2 = document.querySelectorAll('input[name="mdp"]')[1];
-
-                if (password1.value !== password2.value) {
-                    alert('Les mots de passe ne correspondent pas.');
-                    event.preventDefault(); // Empêche l'envoi du formulaire si les mots de passe ne correspondent pas.
-                }
-            });
-        });
-    </script>
+    <title>Bande's Lovers</title>
+    <link rel="stylesheet" href="./form.css">
 </head>
-<header class="H">
-    <a href="BD.html"><img src="logo.png" alt="logo"></a>
-    <h1>Bienvenu Sur Bande's Lovers</h1>
-    <h2>Veuillez renseigner tout les champs</h2>
-</header>
 
 <body>
 
-    <form id="loginForm">
-        <label for="username">Nom d'utilisateur:</label>
-        <input type="text" id="username" name="username" required>
-
-        <label for="email">E-mail:</label>
-        <input type="email" id="email" name="email" required>
-
-        <label for="password">Mot de passe:</label>
-        <input type="password" id="password" name="password" required>
-
-        <label for="confirmPassword">Confirmez le mot de passe:</label>
-        <input type="password" id="confirmPassword" name="confirmPassword" required>
-
-        <div>
-            <input type="checkbox" id="cgu" name="cgu" required>
-            <label for="cgu">J'accepte les CGU</label>
+    <header class="header">
+        <a href="BD.html"><img src="logo.png" alt="logo"></a>
+        <div class="header-text">
+            <h1>Bienvenue Sur Bande's Lovers</h1>
+            <h2>Veuillez renseigner tous les champs</h2>
         </div>
+    </header>
 
-        <div>
-            <input type="checkbox" id="newsletter" name="newsletter">
-            <label for="newsletter">S'abonner à la newsletter</label>
-        </div>
+    <div class="container">
+        <form id="loginForm">
+            <label for="username">Nom d'utilisateur:</label>
+            <input type="text" id="username" name="username" required>
 
-        <button type="button" onclick="validateForm()">Se connecter</button>
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" required>
 
-        <div class="error-message" id="errorMessage"></div>
-    </form>
-    <img class="bul" src="bul.jpg" alt="bulle">
-    <img class= "bull" src="bull.jpg" alt="bulle2">
-    <footer class="foot">
+            <label for="password">Mot de passe:</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="confirmPassword">Confirmez le mot de passe:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required>
+
+            <div class="checkbox-container">
+                <input type="checkbox" id="cgu" name="cgu" required>
+                <label for="cgu">J'accepte les CGU</label>
+            </div>
+
+            <div class="checkbox-container">
+                <input type="checkbox" id="newsletter" name="newsletter">
+                <label for="newsletter">S'abonner à la newsletter</label>
+            </div>
+
+            <button type="button" onclick="validateForm()">Se connecter</button>
+
+            <div class="error-message" id="errorMessage"></div>
+        </form>
+    </div>
+
+    <footer class="footer">
         <p>&copy; 2023 Votre Site de BD. Tous droits réservés.</p>
     </footer>
 
+    <script src="./js/form.js"></script>
+
 </body>
-<script src="./js/form.js"></script>
 
 </html>

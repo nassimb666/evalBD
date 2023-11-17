@@ -12,12 +12,10 @@ function validateForm() {
     } else if (!cguCheckbox.checked) {
         errorMessage.textContent = "Veuillez accepter les CGU.";
     } else {
-        // Le formulaire est valide, vous pouvez ici envoyer les données au serveur
         errorMessage.textContent = "";
         alert("Formulaire envoyé avec succès!\nNom d'utilisateur: " + username +
             "\nE-mail: " + email +
             "\nMot de passe: " + password +
             "\nAbonnement newsletter: " + (newsletterCheckbox.checked ? "Oui" : "Non"));
-        // Vous pouvez également ajouter ici une redirection vers une autre page.
     }
 }

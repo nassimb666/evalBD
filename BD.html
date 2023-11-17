@@ -11,7 +11,13 @@
     <title>Les BD</title>
 </head>
 
-<header>
+    <header class="H">
+        <a href="BD.html"><img src="logo.png" alt="logo"></a>
+        <h1>Bienvenu Sur Bande's Lovers</h1>
+        <p>retrouvez toute vos BD</p>
+    </header>
+
+<body>
     <div class="row">
         <div class="col-sm-12">
             <label for="searchAuthor">Rechercher par auteur :</label>
@@ -19,9 +25,6 @@
             <button id="searchButton">Rechercher</button>
         </div>
     </div>
-</header>
-
-<body>
     <div class="container">
         <h1>Liste des BD</h1>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#panierModal">
@@ -40,7 +43,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <!-- Ici seront affichés les éléments du panier -->
+                        <!-- Ici affichés les éléments du panier -->
                         <ul id="panier-liste-modal"></ul>
                         <p>Total du panier: <span id="total-panier-modal">0</span> €</p>
                     </div>
@@ -85,7 +88,7 @@
         </div>
     </div>
     <div id="authorWorks" class="row mt-4">
-        <!-- Ici seront affichées les œuvres de l'auteur -->
+        
     </div>
     <div>
         <a href="./inscription.html" class="btn"  role="button">S'inscrire</a>
@@ -103,6 +106,9 @@
             <tbody id="tableBody"></tbody>
         </table>
     </div>
+    <footer class="foot">
+        <p>&copy; 2023 Votre Site de BD. Tous droits réservés.</p>
+    </footer>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="./data/auteurs.js"></script>
